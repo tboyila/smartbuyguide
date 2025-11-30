@@ -1,67 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - SmartBuyGuide</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
-        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .tagline { font-size: 1.2rem; opacity: 0.9; }
-        main { padding: 3rem 0; }
-        .content { max-width: 900px; margin: 0 auto; }
-        h2 { color: #667eea; margin: 2rem 0 1rem; font-size: 1.8rem; }
-        p { margin-bottom: 1rem; }
-        .last-updated { color: #666; font-style: italic; margin-bottom: 2rem; }
-        footer { background: #2d3748; color: white; padding: 2rem 0; margin-top: 4rem; }
-        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; }
-        .footer-links a { color: white; text-decoration: none; transition: color 0.3s; }
-        .footer-links a:hover { color: #667eea; }
-        .copyright { text-align: center; opacity: 0.8; font-size: 0.9rem; }
-    </style>
+  <meta charset="UTF-8" />
+  <title>SmartBuyGuide - Terms of Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <h1>SmartBuyGuide</h1>
-            <p class="tagline">Terms of Service</p>
+<body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="index.html" class="flex items-center space-x-2">
+          <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+            <span class="w-6 h-6 text-white text-xl font-bold">S</span>
+          </div>
+          <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            SmartBuyGuide
+          </span>
+        </a>
+
+        <div class="flex items-center space-x-8">
+          <a href="index.html" class="flex items-center text-gray-700 hover:text-blue-600 transition">
+            <span class="w-4 h-4 mr-1 inline-block">&larr;</span>
+            Back to Home
+          </a>
         </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="content">
-                <p class="last-updated">Last Updated: November 30, 2025</p>
-                <h2>1. Acceptance of Terms</h2>
-                <p>By accessing and using SmartBuyGuide, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.</p>
-                <h2>2. Description of Service</h2>
-                <p>SmartBuyGuide provides product comparison, reviews, and recommendations to help users make informed purchasing decisions. We may provide affiliate links to third-party merchants.</p>
-                <h2>3. User Conduct</h2>
-                <p>You agree to use our service only for lawful purposes and in accordance with these Terms. You may not use our service in any way that could damage, disable, or impair our website.</p>
-                <h2>4. Intellectual Property</h2>
-                <p>All content on SmartBuyGuide, including text, graphics, logos, and software, is the property of SmartBuyGuide or its content suppliers and is protected by copyright laws.</p>
-                <h2>5. Affiliate Disclosure</h2>
-                <p>SmartBuyGuide may earn commissions from purchases made through affiliate links on our site. This does not affect the price you pay or our recommendations.</p>
-                <h2>6. Limitation of Liability</h2>
-                <p>SmartBuyGuide is not liable for any damages arising from your use of our service or any products purchased through affiliate links.</p>
-                <h2>7. Changes to Terms</h2>
-                <p>We reserve the right to modify these terms at any time. Continued use of our service after changes constitutes acceptance of the modified terms.</p>
-                <h2>8. Contact Information</h2>
-                <p>For questions about these Terms of Service, please contact us through our website.</p>
-            </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Terms Content -->
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
+      <p class="text-gray-600 mb-8">Last Updated: November 30, 2024</p>
+
+      <div class="space-y-8 text-gray-700">
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Acceptance of Terms</h2>
+          <p>
+            By accessing and using SmartBuyGuide ("Service", "we", "us", or "our"), you accept and agree to be bound by
+            the terms and provision of this agreement. If you do not agree to these Terms of Service, please do not use
+            our Service.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">2. Description of Service</h2>
+          <p>
+            SmartBuyGuide provides a platform for product comparison, reviews, and recommendations. We aggregate
+            information from various sources and affiliate partners to help users make informed purchasing decisions.
+            Our Service includes:
+          </p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Product comparison tools and price tracking</li>
+            <li>Expert reviews and buying guides</li>
+            <li>Links to affiliate partners and retailers</li>
+            <li>User account features and personalization</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">3. User Accounts</h2>
+          <p>
+            To access certain features of our Service, you may be required to create an account. You agree to:
+          </p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Provide accurate, current, and complete information</li>
+            <li>Maintain the security of your password and account</li>
+            <li>Notify us immediately of any unauthorized use of your account</li>
+            <li>Be responsible for all activities that occur under your account</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Affiliate Disclosure</h2>
+          <p>
+            SmartBuyGuide participates in affiliate marketing programs. When you click on links to products and make a
+            purchase, we may receive a commission at no additional cost to you. This helps support our platform and
+            allows us to provide free content and services. Our affiliate relationships do not influence our editorial
+            content or product recommendations.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">5. User Conduct</h2>
+          <p>You agree not to:</p>
+          <ul class="list-disc pl-6 mt-2 space-y-1">
+            <li>Use the Service for any illegal purpose or in violation of any laws</li>
+            <li>Attempt to gain unauthorized access to our systems or networks</li>
+            <li>Interfere with or disrupt the Service or servers</li>
+            <li>Upload or transmit viruses, malware, or malicious code</li>
+            <li>Collect or harvest personal information from other users</li>
+            <li>Use automated systems (bots, scrapers) without permission</li>
+            <li>Impersonate any person or entity or misrepresent your affiliation</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">6. Intellectual Property</h2>
+          <p>
+            All content on SmartBuyGuide, including text, graphics, logos, images, and software, is the property of
+            SmartBuyGuide or its content suppliers and is protected by copyright, trademark, and other intellectual
+            property laws. You may not reproduce, distribute, modify, or create derivative works without our express
+            written permission.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">7. Third-Party Links</h2>
+          <p>
+            Our Service contains links to third-party websites and services. We are not responsible for the content,
+            privacy policies, or practices of any third-party sites. We encourage you to review the terms and privacy
+            policies of any third-party sites you visit.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">8. Disclaimer of Warranties</h2>
+          <p>
+            THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+            IMPLIED. We do not warrant that the Service will be uninterrupted, secure, or error-free. Product
+            information, prices, and availability are subject to change without notice.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">9. Limitation of Liability</h2>
+          <p>
+            TO THE MAXIMUM EXTENT PERMITTED BY LAW, SmartBuyGuide SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
+            SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY
+            OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">10. Indemnification</h2>
+          <p>
+            You agree to indemnify, defend, and hold harmless SmartBuyGuide and its officers, directors, employees, and
+            agents from any claims, liabilities, damages, losses, costs, or expenses arising from your use of the
+            Service or violation of these Terms.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">11. Modifications to Service and Terms</h2>
+          <p>
+            We reserve the right to modify or discontinue the Service at any time without notice. We may also revise
+            these Terms from time to time. Continued use of the Service after changes constitutes acceptance of the
+            revised Terms.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">12. Termination</h2>
+          <p>
+            We may terminate or suspend your account and access to the Service immediately, without prior notice or
+            liability, for any reason, including breach of these Terms. Upon termination, your right to use the Service
+            will immediately cease.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">13. Governing Law</h2>
+          <p>
+            These Terms shall be governed by and construed in accordance with the laws of the United States, without
+            regard to its conflict of law provisions.
+          </p>
+        </section>
+
+        <!-- TikTok Integration Terms -->
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">14. Use of TikTok Login Kit and Content Posting API</h2>
+          <p class="mb-3">
+            SmartBuyGuide integrates TikTok Login Kit and the TikTok Content Posting API to enable seamless product
+            sharing and user authentication.
+          </p>
+          <p class="mb-3">
+            By clicking the <strong>“Login with TikTok”</strong> button, you initiate TikTok’s OAuth 2.0 flow and
+            authorize SmartBuyGuide to access your basic TikTok profile information, including username, display name,
+            and profile picture. You acknowledge that this access is required to provide personalized features and
+            saved preferences within the Service.
+          </p>
+          <p class="mb-3">
+            When you use the <strong>“Share to TikTok”</strong> or <strong>“Post to TikTok”</strong> functionality on
+            product detail pages, you instruct SmartBuyGuide to create and publish content to your TikTok account via
+            the TikTok Content Posting API. You are solely responsible for the content you create and publish,
+            including product recommendations, images, captions, and hashtags.
+          </p>
+          <p class="mb-3">
+            All TikTok-related actions are strictly user-initiated through clearly labeled UI elements with official
+            TikTok branding. SmartBuyGuide does not post any content to TikTok on your behalf without your explicit
+            consent and action.
+          </p>
+          <p>
+            Your use of TikTok Login Kit and the Content Posting API is also subject to TikTok’s own terms of service,
+            community guidelines, and policies. You agree to comply with all applicable TikTok terms when using these
+            integrations through SmartBuyGuide.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">15. Contact Information</h2>
+          <p>
+            If you have any questions about these Terms of Service, please contact us at:
+          </p>
+          <div class="mt-2 bg-gray-50 p-4 rounded-lg">
+            <p><strong>Email:</strong> legal@smartbuyguide.com</p>
+            <p><strong>Address:</strong> SmartBuyGuide, 123 Commerce Street, Suite 100, New York, NY 10001</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400">&copy; 2024 SmartBuyGuide. All rights reserved.</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+          <a href="terms-of-service.html" class="text-gray-400 hover:text-white transition">Terms</a>
+          <a href="privacy-policy.html" class="text-gray-400 hover:text-white transition">Privacy</a>
         </div>
-    </main>
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="/">Home</a>
-                <a href="/terms.html">Terms of Service</a>
-                <a href="/privacy.html">Privacy Policy</a>
-            </div>
-            <p class="copyright">&copy; 2025 SmartBuyGuide. All rights reserved.</p>
-        </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
