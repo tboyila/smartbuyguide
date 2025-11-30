@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>SmartBuyGuide</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Tailwind CDN so existing utility classes still work -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -14,7 +14,6 @@
       <div class="flex justify-between items-center h-16">
         <div class="flex items-center space-x-2">
           <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-            <!-- Search icon replacement -->
             <span class="text-white text-xl font-bold">S</span>
           </div>
           <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -39,7 +38,6 @@
           <span class="block w-6 h-0.5 bg-gray-800"></span>
         </button>
       </div>
-      <!-- For simplicity, mobile menu omitted in static HTML -->
     </nav>
   </header>
 
@@ -63,12 +61,21 @@
         <a href="#about" class="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold border-2 border-blue-600 hover:bg-blue-50 transition text-center">
           Learn More
         </a>
-        <!-- New: Visible Login with TikTok button -->
-        <a href="#tiktok" class="px-8 py-4 bg-black text-white rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105 text-center inline-flex items-center justify-center gap-2">
-          <!-- Replace src with official TikTok asset path -->
+        <!-- Login with TikTok hero button -->
+        <button
+          type="button"
+          onclick="loginWithTikTok()"
+          class="px-8 py-4 bg-black text-white rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105 text-center inline-flex items-center justify-center gap-2"
+        >
+          <!-- Replace with official TikTok logo asset in your repo -->
           <img src="tiktok-logo.svg" alt="TikTok" class="w-5 h-5" />
           <span>Login with TikTok</span>
-        </a>
+        </button>
+      </div>
+
+      <!-- Simple auth status -->
+      <div class="mt-6 text-sm text-gray-600">
+        <span id="tiktok-auth-status">Not logged in with TikTok.</span>
       </div>
     </div>
   </section>
@@ -148,34 +155,37 @@
         SmartBuyGuide TikTok Integration
       </h2>
 
-      <!-- New: Visual demo of buttons with TikTok icon -->
+      <!-- TikTok buttons demo -->
       <div class="max-w-3xl mx-auto mb-10">
         <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
           <p class="text-sm font-semibold text-gray-700 mb-4">
-            TikTok Integration UI (Demo)
+            TikTok Integration UI
           </p>
           <div class="flex flex-wrap gap-4">
-            <!-- Login with TikTok button -->
+            <!-- Login with TikTok -->
             <button
               type="button"
+              onclick="loginWithTikTok()"
               class="px-4 py-2 bg-black text-white rounded-lg font-medium inline-flex items-center gap-2 shadow-sm hover:shadow-md transition"
             >
               <img src="tiktok-logo.svg" alt="TikTok" class="w-5 h-5" />
               <span>Login with TikTok</span>
             </button>
 
-            <!-- Share to TikTok button -->
+            <!-- Share to TikTok -->
             <button
               type="button"
+              onclick="openShareModal()"
               class="px-4 py-2 bg-white text-gray-900 rounded-lg font-medium inline-flex items-center gap-2 border border-gray-300 shadow-sm hover:bg-gray-100 transition"
             >
               <img src="tiktok-logo.svg" alt="TikTok" class="w-5 h-5" />
               <span>Share to TikTok</span>
             </button>
 
-            <!-- Post to TikTok button -->
+            <!-- Post to TikTok (same modal, direct post mode) -->
             <button
               type="button"
+              onclick="openShareModal('DIRECT_POST')"
               class="px-4 py-2 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white rounded-lg font-medium inline-flex items-center gap-2 shadow-sm hover:shadow-md transition"
             >
               <img src="tiktok-logo.svg" alt="TikTok" class="w-5 h-5" />
@@ -183,8 +193,8 @@
             </button>
           </div>
           <p class="text-xs text-gray-500 mt-3">
-            Buttons shown for demonstration. All actions are user-initiated and wired to TikTok’s Login Kit
-            and Content Posting API in the production app.
+            All TikTok actions are user-initiated and wired to TikTok Login Kit and the Content Posting API
+            via your backend integration.
           </p>
         </div>
       </div>
@@ -227,6 +237,16 @@
           branding. No content is posted automatically without explicit user consent and action. The complete
           flow is demonstrated using TikTok’s sandbox environment in the submitted demo video.
         </p>
+
+        <!-- Show auth code for demo -->
+        <div id="tiktok-auth-code-container" class="mt-6 hidden">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Authorization Code (Demo)</h3>
+          <p class="text-sm text-gray-600 mb-2">
+            For demo purposes, we show the OAuth authorization code returned by TikTok. In production this
+            is sent securely to the backend to exchange for an access token.
+          </p>
+          <code id="tiktok-auth-code" class="block text-xs bg-gray-100 rounded-md p-3 break-all"></code>
+        </div>
       </div>
     </div>
   </section>
@@ -320,5 +340,247 @@
       </div>
     </div>
   </footer>
+
+  <!-- Share / Post Modal -->
+  <div id="share-modal" class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-semibold text-gray-900" id="share-modal-title">
+          Share Product to TikTok
+        </h3>
+        <button class="text-gray-500 hover:text-gray-800" onclick="closeShareModal()">&times;</button>
+      </div>
+
+      <form id="share-form" class="space-y-4" onsubmit="submitShareForm(event)">
+        <input type="hidden" id="post-mode" name="postMode" value="DRAFT">
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
+          <input
+            id="product-name"
+            type="text"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Example: SmartBuyGuide Top Pick - Noise Cancelling Headphones"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Media URL</label>
+          <input
+            id="media-url"
+            type="url"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="https://your-cdn.com/product-image.jpg"
+            required
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Caption</label>
+          <textarea
+            id="caption"
+            rows="3"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Why you love this product, plus hashtags like #SmartBuyGuide #TikTokMadeMeBuyIt"
+            required
+          ></textarea>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-gray-500">
+          <span id="share-status"></span>
+          <span>Posts are published via TikTok Content Posting API from the backend.</span>
+        </div>
+
+        <div class="flex justify-end gap-3 mt-4">
+          <button
+            type="button"
+            class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm hover:bg-gray-100"
+            onclick="closeShareModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-900 inline-flex items-center gap-2"
+          >
+            <img src="tiktok-logo.svg" alt="TikTok" class="w-4 h-4" />
+            <span>Send to TikTok</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TikTok Integration Script -->
+  <script>
+    // === CONFIG - replace with your real values ===
+    const TIKTOK_CLIENT_KEY = "YOUR_TIKTOK_CLIENT_KEY";
+    const REDIRECT_URI = "https://your-domain.com/index.html"; // must match TikTok dev portal
+    // Include any scopes you’re approved for; video.publish required for direct posting
+    const TIKTOK_SCOPE = "user.info.basic,video.publish";
+
+    // Backend endpoints YOU implement:
+    const BACKEND_EXCHANGE_URL = "/api/tiktok/exchange-code"; // POST { code, code_verifier }
+    const BACKEND_POST_URL = "/api/tiktok/post"; // POST { caption, mediaUrl, productName, postMode }
+
+    // === PKCE helpers (for OAuth v2 with Login Kit) ===
+    function base64UrlEncode(buffer) {
+      const bytes = new Uint8Array(buffer);
+      let binary = "";
+      for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+
+    async function generateCodeVerifierAndChallenge() {
+      const array = new Uint8Array(32);
+      crypto.getRandomValues(array);
+      const verifier = base64UrlEncode(array);
+      const encoder = new TextEncoder();
+      const data = encoder.encode(verifier);
+      const digest = await crypto.subtle.digest("SHA-256", data);
+      const challenge = base64UrlEncode(digest);
+      return { verifier, challenge };
+    }
+
+    // === Login with TikTok ===
+    async function loginWithTikTok() {
+      if (!TIKTOK_CLIENT_KEY || TIKTOK_CLIENT_KEY === "YOUR_TIKTOK_CLIENT_KEY") {
+        alert("Please configure TIKTOK_CLIENT_KEY and REDIRECT_URI in index.html");
+        return;
+      }
+
+      const { verifier, challenge } = await generateCodeVerifierAndChallenge();
+      const state = crypto.randomUUID();
+
+      sessionStorage.setItem("tiktok_code_verifier", verifier);
+      sessionStorage.setItem("tiktok_state", state);
+
+      const url = new URL("https://www.tiktok.com/v2/auth/authorize/");
+      url.searchParams.set("client_key", TIKTOK_CLIENT_KEY);
+      url.searchParams.set("response_type", "code");
+      url.searchParams.set("scope", TIKTOK_SCOPE);
+      url.searchParams.set("redirect_uri", REDIRECT_URI);
+      url.searchParams.set("state", state);
+      url.searchParams.set("code_challenge", challenge);
+      url.searchParams.set("code_challenge_method", "S256");
+
+      window.location.href = url.toString();
+    }
+
+    // === Handle redirect (TikTok -> SmartBuyGuide) ===
+    async function handleOAuthRedirect() {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      const state = params.get("state");
+      const error = params.get("error");
+
+      const statusEl = document.getElementById("tiktok-auth-status");
+      const codeContainer = document.getElementById("tiktok-auth-code-container");
+      const codeEl = document.getElementById("tiktok-auth-code");
+
+      if (error) {
+        statusEl.textContent = "TikTok login failed: " + error;
+        return;
+      }
+
+      if (!code) {
+        return; // no OAuth redirect
+      }
+
+      const storedState = sessionStorage.getItem("tiktok_state");
+      if (state && storedState && state !== storedState) {
+        statusEl.textContent = "TikTok login error: state mismatch (possible CSRF).";
+        return;
+      }
+
+      statusEl.textContent = "TikTok login successful (authorization code received).";
+      codeContainer.classList.remove("hidden");
+      codeEl.textContent = code;
+
+      // OPTIONAL: automatically call backend to exchange code for access token
+      const verifier = sessionStorage.getItem("tiktok_code_verifier");
+      if (!verifier) {
+        return;
+      }
+
+      try {
+        const res = await fetch(BACKEND_EXCHANGE_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code, code_verifier: verifier, redirect_uri: REDIRECT_URI })
+        });
+
+        if (!res.ok) {
+          console.warn("Backend exchange failed", await res.text());
+          return;
+        }
+
+        const data = await res.json();
+        console.log("TikTok access token + user info from backend:", data);
+        // For demo, you might show username from backend response if you return it
+        if (data && data.user && data.user.display_name) {
+          statusEl.textContent = `Logged in as @${data.user.display_name} on TikTok.`;
+        }
+      } catch (e) {
+        console.error("Exchange code error:", e);
+      }
+    }
+
+    // === Share / Post modal logic ===
+    function openShareModal(postMode = "DRAFT") {
+      document.getElementById("post-mode").value = postMode;
+      document.getElementById("share-modal-title").textContent =
+        postMode === "DIRECT_POST" ? "Post Product Directly to TikTok" : "Share Product to TikTok";
+      document.getElementById("share-status").textContent = "";
+      document.getElementById("share-modal").classList.remove("hidden");
+      document.getElementById("share-modal").classList.add("flex");
+    }
+
+    function closeShareModal() {
+      document.getElementById("share-modal").classList.add("hidden");
+      document.getElementById("share-modal").classList.remove("flex");
+    }
+
+    async function submitShareForm(event) {
+      event.preventDefault();
+      const productName = document.getElementById("product-name").value.trim();
+      const mediaUrl = document.getElementById("media-url").value.trim();
+      const caption = document.getElementById("caption").value.trim();
+      const postMode = document.getElementById("post-mode").value;
+      const statusEl = document.getElementById("share-status");
+
+      if (!productName || !mediaUrl || !caption) return;
+
+      statusEl.textContent = "Sending content to backend…";
+
+      try {
+        const res = await fetch(BACKEND_POST_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ productName, mediaUrl, caption, postMode })
+        });
+
+        if (!res.ok) {
+          statusEl.textContent = "Error sending content to backend.";
+          console.error("Backend post error", await res.text());
+          return;
+        }
+
+        const data = await res.json();
+        console.log("Backend post result:", data);
+        statusEl.textContent = "Content sent to TikTok via backend. Check TikTok app for final review/post.";
+      } catch (e) {
+        console.error("Post to TikTok error:", e);
+        statusEl.textContent = "Network error sending content to backend.";
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      handleOAuthRedirect();
+    });
+  </script>
 </body>
 </html>
